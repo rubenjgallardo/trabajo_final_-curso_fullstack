@@ -6,6 +6,9 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
 }
 
 .container {
@@ -65,4 +68,9 @@ button:hover {
 
 .login-link a:hover {
     text-decoration: underline;
+}
+
+#password-no-match{
+    display: none;
+    color: red;
 }
