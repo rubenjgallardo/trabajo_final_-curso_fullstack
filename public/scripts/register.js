@@ -7,10 +7,26 @@ const photoURL = document.getElementById("photo")
 
 
 form.addEventListener("submit", (event)=>{
+    console.log("submit!")
     event.preventDefault()
-    if (password === confirmPassword) {
-        fetch("http://localhost:3000/")
+    if (password.value === confirmPassword.value) {
+        fetch('http://localhost:3000/api/user/register',{
+            method:"POST",
+            body:JSON.stringify({
+                email:email.value,
+                password:password.value,
+                photo:photoURL.value,
+                name: nombre.value
+            }),
+            headers:{
+                "Content-Type": "application/json",
+            }
+        }).then((res)=>{
+            console.log("res",res)
+        }).catch((error)=>{
+            console.error(error)
+        })
     }else{
-        document.getElementById("password-no-match").style.display = "block"
+        document.getElementById("password-no-match" ).style.display = "block"
     }
 })

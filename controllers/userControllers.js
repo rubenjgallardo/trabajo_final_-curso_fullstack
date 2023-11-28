@@ -1,15 +1,24 @@
 const User = require("../models/userModels")
 const userUtils = require("../utils/userUtils")
 const login = async (req,res)=>{
-    const email = req.body.email
-    const password = req.body.password
-    const user = await User.findOne({email: email})
-    const matchPassword = userUtils.comparePassword(password,user.hash,user.salt)
-    if (matchPassword) {
-        
-    } else {
-        
+    try {
+        const email = req.body.email
+        const password = req.body.password
+        const user = await User.findOne({email: email})
+        console.log("user",user)
+        const matchPassword = userUtils.comparePassword(password,user.password,user.salt)
+        console.log("matchPassword:",matchPassword)
+        if (matchPassword) {
+            const token = userUtils.createToken(user)
+            res.status(200).send(token)
+        } else{
+            res.status(400).send(" password no match")
+        } 
+    } catch (error) {
+        console.log("error",error)
+        res.status(500).send(error)
     }
+    
 }
 
 const register = async (req,res)=>{
@@ -23,9 +32,9 @@ const register = async (req,res)=>{
         await User.create({
             name: name,
             email: email,
-            password: hashSalt,
+            password: hashSalt.hash,
             salt: hashSalt.salt,
-            isAdmin: false,
+            isAdmin: false
         })
     } else {
         res.status(400).send("Datos Incompletos")
@@ -39,5 +48,5 @@ const register = async (req,res)=>{
 
 module.exports = {
     login: login,
-    register: register
+    register:register
 } 

@@ -16,7 +16,7 @@ app.set('view engine', 'ejs');
 
 app.use('/',viewsRouter)
 
-app.use('/api/',userRoutes)
+app.use('/api/user/',userRoutes)
 
 app.listen(port, async () => {
   try{
