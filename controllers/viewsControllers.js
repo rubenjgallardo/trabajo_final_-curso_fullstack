@@ -7,12 +7,22 @@ const register = (req,res)=>{
 }
 
 const home = (req,res)=>{
-    res.render("pages/home")
+    if (req.user) {
+       //console.log("req.user.name:",req.user.data)//
+        res.render("pages/home", {user:req.user})
+    } else {
+       res.redirect("http://localhost:3000/login") 
+    }
+}
+
+const dashboard = (req,res)=>{
+    res.render("pages/dashboard")
 }
 
 
 module.exports = {
     login: login,
     register: register,
-    home:home
+    home: home,
+    dashboard:dashboard
 } 

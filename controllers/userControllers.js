@@ -5,9 +5,7 @@ const login = async (req,res)=>{
         const email = req.body.email
         const password = req.body.password
         const user = await User.findOne({email: email})
-        console.log("user",user)
         const matchPassword = userUtils.comparePassword(password,user.password,user.salt)
-        console.log("matchPassword:",matchPassword)
         if (matchPassword) {
             const token = userUtils.createToken(user)
             res.status(200).send(token)
@@ -46,7 +44,14 @@ const register = async (req,res)=>{
 }
 
 
+const logout = (req,res)=>{
+    req.user = null
+}
+
+
+
 module.exports = {
     login: login,
-    register:register
+    register: register,
+    logout: logout
 } 

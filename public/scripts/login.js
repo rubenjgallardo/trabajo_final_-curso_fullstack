@@ -15,8 +15,10 @@ form.addEventListener("submit",(event)=>{
             "Content-Type": "application/json",
         }
     }).then(async (res)=>{
-        const text = await res.text()
-        console.log("res:",text)
+        const token = await res.text()
+        localStorage.setItem("token",token)
+        document.cookie = "token=" + token;
+        window.location.href = "http://localhost:3000/"
     })
     .catch(async (err)=>{
         const error = await err.text()
