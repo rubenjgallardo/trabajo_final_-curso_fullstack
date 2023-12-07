@@ -46,6 +46,8 @@ const register = async (req,res)=>{
 
 const logout = (req,res)=>{
     req.user = null
+    res.clearCookies("token");
+    res.status(200).end();
 }
 
 

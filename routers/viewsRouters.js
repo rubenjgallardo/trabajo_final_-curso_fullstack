@@ -6,7 +6,7 @@
  route.get('/login',viewControllers.login)
  route.get('/register',viewControllers.register)
  route.get('/', authMiddleware, viewControllers.home)
- route.get('/dashboard', isAdmin, viewControllers.dashboard)
+ route.get('/dashboard', authMiddleware , isAdmin, viewControllers.dashboard)
 
 
  module.exports = route

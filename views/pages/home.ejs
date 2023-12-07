@@ -21,7 +21,7 @@
                     <p><strong><%= user.name %></strong></p>
                     <% if (user.isAdmin) { %>
                     <span id="admin-label">Admin</span>
-                    <a href="./dashboard.ejs">Dashboard</a>
+                    <a href="./dashboard">Dashboard</a>
                     <% } %>
                     <a href="#">Carrito de Compras</a>
                     <a href="#">Mis compras</a>
@@ -105,10 +105,11 @@
         }
 
         async function logout (){
-            await fetch("http://localhost:3000/api/logout").then(()=>{
-            window.location.href = "http://localhost:3000/"
-            })
-        }
+            await fetch("http://localhost:3000/api/logout")
+            document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+            window.location.href = "http://localhost:3000/login"
+            }
+        
 
     </script>
 </body>
