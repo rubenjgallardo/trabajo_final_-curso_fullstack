@@ -2,6 +2,8 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const viewsRouter = require('./routers/viewsRouters')
 const userRoutes = require('./routers/userRoutes')
+const productRoutes = require("./routers/productsRoute")
+
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
 const cors = require('cors')
@@ -19,6 +21,7 @@ app.set('view engine', 'ejs');
 app.use('/',viewsRouter)
 
 app.use('/api/user/',userRoutes)
+app.use("/api/product/", productRoutes)
 
 app.listen(port, async () => {
   try{
