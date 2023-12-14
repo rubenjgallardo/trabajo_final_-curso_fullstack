@@ -10,7 +10,10 @@
     <header>
         <nav class="navbar">
             <div class="logo">
+              <a href="/">
                 <span>Ecommerce</span>
+              </a>
+                
             </div>
             <div class="user">
                 <img src="./photo_profile.webp" alt="Usuario" class="user-image" onclick="toggleMenu()">
@@ -166,22 +169,11 @@
             document.getElementById('editOrderModal').style.display = 'none';
             }
 
-            function openDeleteModal() {
-            document.getElementById('deleteModal').style.display = 'block';
-            }
+            
+           
 
-            // Función para cerrar el modal de eliminación
-            function closeDeleteModal() {
-            document.getElementById('deleteModal').style.display = 'none';
-            }
-
-            // Función para confirmar la eliminación
-            function confirmDelete() {
-            // Aquí puedes agregar la lógica para eliminar el producto o la orden
-            // Una vez confirmada la eliminación, puedes redirigir o realizar otras acciones necesarias.
-            console.log('Eliminado'); // Este es solo un ejemplo, ajusta según tu lógica.
-            closeDeleteModal();
-            }
+           
+            
 
             function toggleMenu() {
             var userMenu = document.getElementById("userMenu");

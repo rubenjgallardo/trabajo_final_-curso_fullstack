@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const viewsRouter = require('./routers/viewsRouters')
 const userRoutes = require('./routers/userRoutes')
 const productRoutes = require("./routers/productsRoute")
+const cartRoutes = require("./routers/cartRoutes")
 
 const cookieParser = require("cookie-parser")
 const mongoose = require("mongoose")
@@ -21,7 +22,8 @@ app.set('view engine', 'ejs');
 app.use('/',viewsRouter)
 
 app.use('/api/user/',userRoutes)
-app.use("/api/product/", productRoutes)
+app.use('/api/cart/',cartRoutes)
+app.use('/api/product/', productRoutes)
 
 app.listen(port, async () => {
   try{

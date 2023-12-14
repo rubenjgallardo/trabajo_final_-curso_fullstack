@@ -1,11 +1,11 @@
 //varibles Globales
 let products = []
 
-const nombreEdit = document.getElementById('editProductName')
+const editName = document.getElementById('editProductName')
 const editPrice = document.getElementById('editProductPrice')
 const editDescription = document.getElementById('editProductDescription')
 const editImage = document.getElementById('editProductImage')
-
+let selectedProduct;
 
 
 
@@ -19,7 +19,7 @@ fetch("http://localhost:3000/api/product").then(async (data)=>{
                 <img src="${product.image}" alt="">
              ${product.name} - Precio: ${product.price}
              <button class="edit-btn" onclick="openEditModal('${product._id}')">Editar</button>
-             <button class="delete-btn" onclick="openDeleteModal()">Borrar</button>
+             <button class="delete-btn" onclick="openDeleteModal('${product._id}')">Borrar</button>
             </li>
         `
     })
@@ -53,20 +53,66 @@ const createProduct = ()=>{
 
 function openEditModal(productId) {
     console.log("productId", productId)
-    const product = products.find((pr)=> pr._id === productId)
+    selectedProduct = products.find((pr)=> pr._id === productId)
     document.getElementById('editProductModal').style.display = 'block';
-    nombreEdit.value = product.name  
-    editPrice.value = product.price
-    editDescription.value = product.description
-    editImage.value = product.image
+    editName.value = selectedProduct.name  
+    editPrice.value = selectedProduct.price
+    editDescription.value = selectedProduct.description
+    editImage.value = selectedProduct.image
     }
 
 
+    function openDeleteModal(productId) {
+        selectedProduct = products.find((pr)=> pr._id === productId)
+        document.getElementById('deleteModal').style.display = 'block';
+        }
+
+    // Función para confirmar la eliminación
+    function confirmDelete() {
+        fetch("http://localhost:3000/api/product",{
+            method: "DELETE",
+            body:JSON.stringify({
+                productId: selectedProduct._id
+            }),
+            headers:{
+                "Content-Type": "application/json",
+            }
+        }).then(()=>{
+            alert("Producto Eliminado")
+        })
+        .catch(()=>{
+            alert("Error al eliminar el Producto")
+        })
+        closeDeleteModal();
+        }    
+
+
+function closeDeleteModal() {
+        document.getElementById('deleteModal').style.display = 'none';
+    }
+
+    
+function closeEditModal() {
+    document.getElementById('editProductModal').style.display = 'none';
+    }
+
     function updateProduct(){
         fetch("http://localhost:3000/api/product",{
-            method: "POST",
+            method: "PUT",
             body:JSON.stringify({
-                
-            })
+                name:editName.value,
+                price:editPrice.value,
+                description:editDescription.value,
+                image:editImage.value,
+                productId: selectedProduct._id
+            }),
+            headers:{
+                "Content-Type": "application/json",
+            }
+        }).then(()=>{
+            alert("Producto Actualizado")
+        })
+        .catch(()=>{
+            alert("Error al actualizar el Producto")
         })
     }
