@@ -37,14 +37,14 @@
         <div class="product-grid">
             <!-- Aquí irán los productos en forma de cuadrícula -->
             <!-- Ejemplo de un producto -->
-            <% for (var i =0; i < products.length;  i++ ) { %>
-
+            <% for (let i =0; i < products.length;  i++ ) { %>
+                <% var existInCart = cart.some(id => products[i]._id.toString() === id.toString())%>
                 <div class="product">
                     <img src="<%= products[i].image %>" alt="Producto">
                     <h3> <%= products[i].name %> </h3>
                     <p> <%= products[i].description %> </p>
                     <p>Precio: <%= products[i].price %></p>
-                    <button>Agregar al Carrito</button>
+                    <button class="<% existInCart ? "delete-to-cart": "" %>" onclick="addProductToCart('<%=products[i]._id %>')"><%= existInCart ? "Sacar del Carrito": "Agregar al Carrito"%></button>
                 </div>
 
                 <% } %>

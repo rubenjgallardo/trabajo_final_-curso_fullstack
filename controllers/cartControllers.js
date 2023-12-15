@@ -1,10 +1,12 @@
 const Cart = require("../models/CartModel")
 const Product = require("../models/productsModels")
 
-/*
+
 const update = async (req,res)=>{
     try {
-        await Product.findByIdAndUpdate(req.body.productId,req.body)
+        const cart = await Cart.findOne({userId: req.user._id})
+        cart.products.push(req.body.productsId)
+        cart.save()
         res.status(200).end()
     } catch (error) {
         res.status(500).end()
@@ -13,7 +15,7 @@ const update = async (req,res)=>{
 
 
 
-const remove = async (req,res)=>{
+/*const remove = async (req,res)=>{
     try { 
 
         await Product.deleteOne({_id:req.body.productId})
@@ -32,11 +34,11 @@ const get = async (req,res)=>{
         res.status(500).end()  
     }
 }
+*/
 
 module.exports = {
-  create:create,
+  //create:create,
   update:update,
-  remove:remove,
-  get:get
+  //remove:remove,
+  //get:get
 } 
-*/
