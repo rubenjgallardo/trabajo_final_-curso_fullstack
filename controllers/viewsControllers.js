@@ -1,5 +1,5 @@
-const Product = require("../models/productsModels")
-const Cart = require("../models/CartModel")
+const Product = require('../models/productsModels')
+const Cart = require('../models/CartModel')
 const login = (req,res)=>{
     res.render('pages/login');
 }
@@ -12,7 +12,7 @@ const home = async (req,res)=>{
     const products = await Product.find({})
     const shoppingCart = await Cart.findOne({userId:req.user._id})
     if (req.user) {
-        res.render("pages/home", {user:req.user,products:products,cart:shoppingCart.products})
+        res.render('pages/home', {user:req.user,products:products,cart:shoppingCart.products})
     } else {
        res.redirect("http://localhost:3000/login") 
     }
@@ -30,7 +30,7 @@ const cart = async (req,res)=>{
        promises.push(promise)
     })
    await Promise.all(promises).then((products)=>{
-    res.render("pages/shoppingCart", {products:products})
+    res.render('pages/shoppingCart', {products:products})
    })
     
 }

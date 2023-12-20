@@ -6,10 +6,10 @@ const create = async (req,res)=>{
             name: req.body.name,
             price: req.body.price,
             image: req.body.image,
-            description: req.body.description,
+            description: req.body.description
         })
         
-        res.status(200).end()
+        res.status(201).end()
     } catch (error) {
         res.status(500).end()
     }

@@ -39,7 +39,7 @@ const register = async (req,res)=>{
         })
 
         await Cart.create({
-            userId: req.user._id
+            userId: user._id
         })
         res.status(201).end()
 
