@@ -5,9 +5,9 @@ const auth = require("../middlewares/auth")
 const isAdmin = require("../middlewares/isAdmin")
 
 
-route.get("/", auth, productsControllers.get)
-route.post("/", auth, isAdmin, productsControllers.create)
-route.put("/", auth, isAdmin, productsControllers.update)
-route.delete("/", auth, isAdmin, productsControllers.remove)
+route.get('/', auth, productsControllers.get)
+route.post('/', auth, isAdmin, productsControllers.create)
+route.put('/', auth, isAdmin, productsControllers.update)
+route.delete('/', auth, isAdmin, productsControllers.remove)
 
 module.exports = route

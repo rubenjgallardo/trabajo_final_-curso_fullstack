@@ -1,5 +1,6 @@
 const Product = require('../models/productsModels')
 const Cart = require('../models/CartModel')
+
 const login = (req,res)=>{
     res.render('pages/login');
 }

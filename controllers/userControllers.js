@@ -20,7 +20,6 @@ const login = async (req,res)=>{
     }
     
 }
-
 const register = async (req,res)=>{
     try {
     const email = req.body.email
@@ -28,7 +27,7 @@ const register = async (req,res)=>{
     const photo = req.body.photo
     const name = req.body.name
     if (email && password && photo) {
-            const hashSalt = userUtils.createHashAndSalt(password)
+        const hashSalt = userUtils.createHashAndSalt(password)
         const user = await User.create({
             name: name,
             email: email,
